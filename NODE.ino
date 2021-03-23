@@ -13,7 +13,7 @@ void NODE(){
         break;
       case states::CHARGING:
         op_state = 1;
-        // get the current battery voltage 
+        // get the current battery voltage
         vBat = Battery_monitor(Vbat_Pin);
         int i;
         for (i=0; i <= (charging_time / 10); i++){
@@ -25,7 +25,7 @@ void NODE(){
       case states::SLEEP:
         op_state = 0;
         //Sleep(); //If you are using a bluetooth terminal any input wakes from sleep
-        delay(charging_time); //If no terminal Un comment the delay() and comment the sleep function
+        delay(1000 //If no terminal Un comment the delay() and comment the sleep function
         state = states::TEMP;
         break;
       case states::TEMP:

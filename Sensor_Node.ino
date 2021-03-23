@@ -14,7 +14,7 @@ float temp;
 unsigned int charging_time = 30000;
 
 int node_id = 0; //Assigned by MASTER NODE not yet developed
-bool op_state = {}; //CHARGING 1 or SLEEP 0
+bool op_state ; //CHARGING 1 or SLEEP 0
 char device_type[10] = {"NODE"}; //So far just NODE or MASTER
 
 void setup() {
