@@ -25,7 +25,7 @@ void NODE(){
       case states::SLEEP:
         op_state = 0;
         //Sleep(); //If you are using a bluetooth terminal any input wakes from sleep
-        delay(1000 //If no terminal Un comment the delay() and comment the sleep function
+        delay(1000); //If no terminal Un comment the delay() and comment the sleep function
         state = states::TEMP;
         break;
       case states::TEMP:
