@@ -1,10 +1,8 @@
-float Battery_monitor(int analog_pin){
-  //vOUT from voltage divider for battery voltage 
+float Battery_monitor(){
+  //vOUT from voltage divider for battery voltage
   float vOUT;
   int value;
-  value = analogRead(analog_pin);
+  value = analogRead(arduino.pins.Vbat);
   vOUT = (float)value * 5.0 / 1023.0;
-
-  
   return vOUT;
 }

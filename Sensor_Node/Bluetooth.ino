@@ -5,19 +5,19 @@ void Bluetooth_Setup(){
   bluetooth_pins.println("");
   bluetooth_pins.println("****\nInitialized\n****");
 }
-void Bluetooth_Send(float output, bool state, int id){
-  bluetooth_pins.print(output);
-  if (state){
+void Bluetooth_Send(){
+  bluetooth_pins.print(arduino.temp);
+  if (arduino.op_state){
     bluetooth_pins.print(" | CHARGING | ");
   }
-  else if(!state){
+  else if(!arduino.op_state){
     bluetooth_pins.print(" | SLEEP | ");
   }
   else{
     bluetooth_pins.print(" | NULL | ");
   }
-  bluetooth_pins.println(id);
+  bluetooth_pins.println(arduino.node_id);
 }
 void Bluetooth_Receive(){
-  
+
 }

@@ -1,49 +1,27 @@
-void PWM_Generator(int analog_pin, int digital_pin, float vBat) {
-  pinMode(digital_pin, OUTPUT);
-  pinMode(analog_pin, INPUT);
+void PWM_Generator() {
+  pinMode(arduino.pins.PWM, OUTPUT);
+  pinMode(arduino.pins.Vout, INPUT);
 
-  int pulseSig = 170;                                      // duty cycle for 15V out in the arduino PWM range 0-255 (113)
-  int pwmMax = 225;
-  int pwmMin = 25;
-  float vRef = 2.56;                                      // calculated with voltage divider of 9V output
-  float vOUT;
-  int value;                                              // store the 10bit number that arduino reads
-  float vDif = 1.16;
-  float vBatHold;
-  float vHold;
-  float v = 0.0;
-  int counter = 0;
+  arduino.PWM.vBat = Battery_monitor();
+  arduino.PWM.VoutValue = analogRead(arduino.pins.Vout);
+  arduino.PWM.vOUT = arduino.PWM.VoutValue * 5.0/ 1023.0; // convert from bits to a voltage between 0-5
+  analogWrite(arduino.pins.PWM, arduino.PWM.pulseSig);
 
-  value = analogRead(analog_pin);
-  vOUT = (float)value * 5.0 / 1023.0;                     // convert from bits to a voltage between 0-5
-  //Serial.println(vOUT); //Used for debugging
+  arduino.PWM.vHold = arduino.PWM.vOUT - arduino.PWM.vBat;
 
+  arduino.PWM.v = arduino.PWM.vDif - arduino.PWM.vHold;
+  arduino.PWM.vRef = arduino.PWM.vRef + (.1 * arduino.PWM.v);
 
-
-  if ((vOUT > vRef) && (pulseSig > pwmMin))               // if the output is higher than the reference
-                                                          // decrease the duty cycle by 1
+  // if the output is higher than the reference
+  // decrease the duty cycle by 1
+  if ((arduino.PWM.vOUT > arduino.PWM.vRef) && (arduino.PWM.pulseSig > arduino.PWM.pwmMin))
   {
-    pulseSig = pulseSig - 1;
+    arduino.PWM.pulseSig = arduino.PWM.pulseSig - 1; ;
   }
   // if the output is higher than the reference
   // decrease the duty cycle by 1
-  if((vOUT < vRef) && (pulseSig < pwmMax))
+  if((arduino.PWM.vOUT < arduino.PWM.vRef) && (arduino.PWM.pulseSig < arduino.PWM.pwmMax))
   {
-    pulseSig = pulseSig + 1;
+    arduino.PWM.pulseSig = arduino.PWM.pulseSig + 1;
   }
-  analogWrite(digital_pin, pulseSig);
-
-delay(15000);
-
-  vBatHold = vBat;
-  vHold = vOUT - vBatHold;
-  if (vHold < vDif)
-  {
-    vRef = vRef + .1;
-  }
-  else if (vHold > vDif)
-  {
-    vRef = vRef - .1;
-  }
-
 }

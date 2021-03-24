@@ -1,7 +1,8 @@
-bool Solar_Panel_Active(int analogPin) {
+bool Solar_Panel_Active() {
+  pinMode(arduino.pins.solar, INPUT);
   float val;
   float vout;
-  val = analogRead(analogPin);
+  val = analogRead(arduino.pins.solar);
   vout = val * (5.0 / 1023.0);
   if(vout > 4.7){ // If vout is greater than 4.9 volts the solar panel is considered active.
     return 1;
