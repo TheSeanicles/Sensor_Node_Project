@@ -5,6 +5,7 @@ void NODE(){
       switch (state){
       case states::START:
         if ((Solar_Panel_Active(solar_Pin) == 1) && (Battery_monitor(Vbat_Pin) <= 1.70)){
+          
           state = states::CHARGING;
         }
         else{
@@ -24,8 +25,8 @@ void NODE(){
         break;
       case states::SLEEP:
         op_state = 0;
-        //Sleep(); //If you are using a bluetooth terminal any input wakes from sleep
-        delay(1000); //If no terminal Un comment the delay() and comment the sleep function
+        Sleep(); //If you are using a bluetooth terminal any input wakes from sleep
+        //delay(1000); //If no terminal Un comment the delay() and comment the sleep function
         state = states::TEMP;
         break;
       case states::TEMP:
