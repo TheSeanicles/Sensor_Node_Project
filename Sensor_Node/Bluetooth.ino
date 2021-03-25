@@ -14,7 +14,7 @@ void Bluetooth_Send(){
     bluetooth_pins.print(" | SLEEP | ");
   }
   bluetooth_pins.print("Battery Voltage: ");
-  float vbattery = arduino.PWM.Vbat / 0.1708;
+  float vbattery = arduino.PWM.vBat / 0.1708;
   bluetooth_pins.print(vbattery);
   bluetooth_pins.print("V | ");
   bluetooth_pins.println(arduino.node_id);
