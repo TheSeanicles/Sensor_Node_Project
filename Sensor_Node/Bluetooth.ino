@@ -10,12 +10,13 @@ void Bluetooth_Send(){
   if (arduino.op_state){
     bluetooth_pins.print(" | CHARGING | ");
   }
-  else if(!arduino.op_state){
+  else {
     bluetooth_pins.print(" | SLEEP | ");
   }
-  else{
-    bluetooth_pins.print(" | NULL | ");
-  }
+  bluetooth_pins.print("Battery Voltage: ");
+  float vbattery = arduino.PWM.Vbat / 0.1708;
+  bluetooth_pins.print(vbattery);
+  bluetooth_pins.print("V | ");
   bluetooth_pins.println(arduino.node_id);
 }
 void Bluetooth_Receive(){
