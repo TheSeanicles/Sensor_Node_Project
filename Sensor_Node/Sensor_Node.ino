@@ -63,7 +63,6 @@ Arduino ArduinoConstruct(){
   //Assorted Variables
   arduino.charging_time = 30000;
   arduino.node_id=0;
-  arduino.device_type[10] = {"NODE"};
   return arduino;
 }
 
@@ -75,7 +74,5 @@ void setup() {
 }
 
 void loop() {
-  if (arduino.device_type[10] = "NODE"){
-    NODE();
-  }
+  NODE();
 }

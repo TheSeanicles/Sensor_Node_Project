@@ -5,7 +5,6 @@ void NODE(){
       switch (state){
       case states::START:
         if ((Solar_Panel_Active()) && (Battery_monitor() <= 1.74)){
-
           state = states::CHARGING;
         }
         else{
