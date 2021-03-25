@@ -13,7 +13,6 @@ void NODE(){
         break;
       case states::CHARGING:
         arduino.op_state = 1;
-        // get the current battery voltage
         int i;
         for (i=0; i <= (arduino.charging_time / 250); i++){
           PWM_Generator();

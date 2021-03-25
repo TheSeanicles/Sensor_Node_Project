@@ -8,13 +8,13 @@ void Bluetooth_Setup(){
 void Bluetooth_Send(){
   bluetooth_pins.print(arduino.temp);
   if (arduino.op_state){
-    bluetooth_pins.print(" | CHARGING | ");
+    bluetooth_pins.print("C | CHARGING | ");
   }
   else {
-    bluetooth_pins.print(" | SLEEP | ");
+    bluetooth_pins.print("C | SLEEP | ");
   }
   bluetooth_pins.print("Battery Voltage: ");
-  float vbattery = arduino.PWM.vBat / 0.1708;
+  float vbattery = Battery_monitor() / 0.1708;
   bluetooth_pins.print(vbattery);
   bluetooth_pins.print("V | ");
   bluetooth_pins.print("Node ID: ");

@@ -51,13 +51,13 @@ Arduino ArduinoConstruct(){
   arduino.pins.Vbat = A3;
   arduino.pins.PWM = 3;
   //PWM configuration
-  arduino.PWM.pulseSig = 127; // .5 duty cycle in the arduino PWM range 0-255 (113)
+  arduino.PWM.pulseSig = 127; //  duty cycle in the arduino PWM range 0-255
   arduino.PWM.pwmMax = 225;  
   arduino.PWM.pwmMin = 25;
-  arduino.PWM.vRef = 1.16f; // calculated with voltage divider of 10V output 
+  arduino.PWM.vRef = 1.16; // calculated with voltage divider of 10V output 
   arduino.PWM.vOUT;
-  arduino.PWM.vDif = 0.1708f;
-  arduino.PWM.v = 0.0f;
+  arduino.PWM.vDif = 0.1708;
+  arduino.PWM.v = 0.0;
   arduino.PWM.i = 0;
   arduino.PWM.counter = 50;
   //Assorted Variables
