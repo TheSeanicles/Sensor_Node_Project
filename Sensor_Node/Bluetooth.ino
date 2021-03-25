@@ -17,6 +17,7 @@ void Bluetooth_Send(){
   float vbattery = arduino.PWM.vBat / 0.1708;
   bluetooth_pins.print(vbattery);
   bluetooth_pins.print("V | ");
+  bluetooth_pins.print("Node ID: ");
   bluetooth_pins.println(arduino.node_id);
 }
 void Bluetooth_Receive(){
