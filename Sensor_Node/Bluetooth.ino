@@ -8,10 +8,20 @@ void Bluetooth_Setup(){
 void Bluetooth_Send(){
   bluetooth_pins.print(arduino.temp);
   if (arduino.op_state){
-    bluetooth_pins.print("C | CHARGING | ");
+    if (arduino.temp_type == Celsius){
+      bluetooth_pins.print("C | CHARGING | ");
+    }
+    else if (arduino.temp_type == Fahrenheit){
+      bluetooth_pins.print("F | CHARGING | ");
+    }
   }
   else {
-    bluetooth_pins.print("C | SLEEP | ");
+    if (arduino.temp_type == Celsius){
+      bluetooth_pins.print("C | SLEEP | ");
+    }
+    else if (arduino.temp_type == Fahrenheit){
+      bluetooth_pins.print("F | SLEEP | ");
+    }
   }
   bluetooth_pins.print("Battery Voltage: ");
   float vbattery = Battery_monitor() / 0.1708;
@@ -21,5 +31,10 @@ void Bluetooth_Send(){
   bluetooth_pins.println(arduino.node_id);
 }
 void Bluetooth_Receive(){
-
+  if (bluetooth_pins.find("Celsius")){
+    arduino.temp_type = Celsius;
+  }
+  else if (bluetooth_pins.find("Fahrenheit")){
+    arduino.temp_type = Fahrenheit;
+  }
 }
