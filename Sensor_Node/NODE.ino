@@ -18,9 +18,9 @@ void NODE() {
     case states::CHARGING:
       arduino.op_state = 1;
       int i;
-      for (i = 0; i <= (arduino.charging_time / 250); i++) {
+      for (i = 0; i <= (arduino.charging_time / 10); i++) {
         PWM_Generator();
-        delay(250);
+        delay(10);
       }
       state = states::TEMP;
       break;

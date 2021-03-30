@@ -27,6 +27,7 @@ struct _PWM{
   float v;
   int i;
   int counter;
+  float fPWM;
 };
 typedef struct _PWM PWM;
 
@@ -56,16 +57,17 @@ Arduino ArduinoConstruct(){
   arduino.PWM.pulseSig = 127; //  duty cycle in the arduino PWM range 0-255
   arduino.PWM.pwmMax = 225;
   arduino.PWM.pwmMin = 25;
-  arduino.PWM.vRef = 1.16; // calculated with voltage divider of 10V output
+  arduino.PWM.vRef = 1.708f; // calculated with voltage divider of 10V output
   arduino.PWM.vOUT;
-  arduino.PWM.vDif = 0.1708;
+  arduino.PWM.vDif = 0.0952f;
   arduino.PWM.v = 0.0;
   arduino.PWM.i = 0;
   arduino.PWM.counter = 50;
+  arduino.PWM.fPWM = 113.0f;
   //Assorted Variables
   arduino.charging_time = 30000;
   arduino.node_id = 0;
-  arduino.temp_type = Null;
+  arduino.temp_type = Celsius;
   return arduino;
 }
 
