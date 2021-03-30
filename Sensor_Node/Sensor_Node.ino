@@ -2,7 +2,7 @@
 #include <SoftwareSerial.h>
 
 //Initialize Variables
-enum Temperature { Celsius, Fahrenheit };
+enum Temperature { Celsius, Fahrenheit, Null };
 
 struct _pins{
   int temp;
@@ -36,6 +36,7 @@ struct _Arduino{
   float temp;
   Temperature temp_type;
   unsigned int charging_time;
+  char bluetooth_read;
   int node_id;  //Assigned by MASTER NODE not yet developed
   bool op_state; //CHARGING 1 or SLEEP 0
   char device_type[10]; //So far just NODE might add later
@@ -64,7 +65,7 @@ Arduino ArduinoConstruct(){
   //Assorted Variables
   arduino.charging_time = 30000;
   arduino.node_id = 0;
-  arduino.temp_type = Celsius;
+  arduino.temp_type = Null;
   return arduino;
 }
 
@@ -72,12 +73,14 @@ Arduino arduino = ArduinoConstruct();
 
 SoftwareSerial bluetooth_pins(4, 5); // RX | TX
 
+enum class states {START, CHARGING, TEMP, SLEEP, BLUETOOTH, HALT};
+states state = states::START;
+
 void setup() {
   Bluetooth_Setup();
   PWM_Start();
 }
 
 void loop() {
-  Bluetooth_Receive();
   NODE();
 }

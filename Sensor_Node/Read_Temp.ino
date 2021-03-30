@@ -11,10 +11,10 @@ float Read_Temp() {
   //Serial.println(vout);
   //Serial.println(tempC);
   //Serial.println(tempF);
-  if (arduino.temp_type = Fahrenheit){
-    return tempF;
-  }
-  else {
+  if (arduino.temp_type == Celsius){
     return tempC;
+  }
+  else if (arduino.temp_type == Fahrenheit){
+    return tempF;
   }
 }
