@@ -1,1 +1,2 @@
 C:\Users\Admin\Documents\GitHub\Sensor_Node_Project\Push_To_Influx\Push_To_Influx\Debug\Push_To_Influx.exe
+C:\Users\Lenovo ThinkCentre\Documents\GitHub\Sensor_Node_Project\Push_To_Influx\Push_To_Influx\Debug\Push_To_Influx.exe

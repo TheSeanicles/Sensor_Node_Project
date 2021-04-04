@@ -117,7 +117,7 @@ Sensor parseLine(const string& line)
 				token = "NODE: " + token;
 				data.node_id = token;
 				complete_token = true;
-				state = ParseStates::SEPERATOR;
+				state = ParseStates::TEMP;
 			}
 			break;
 		default:
