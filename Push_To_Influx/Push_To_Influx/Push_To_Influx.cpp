@@ -9,7 +9,7 @@ using namespace std;
 
 // Visit https://github.com/orca-zhang/influxdb-c for more test cases
 
-#define TIME_INTERVAL 5000 //Milliseconds
+#define TIME_INTERVAL 20000 //Milliseconds Must be less than Arduino charge time
 
 #define WAIT_1s 1000 //Milliseconds
 
@@ -38,16 +38,11 @@ int main(void)
         string password;
         cin >> password;
 
-        const char* portName = "\\\\.\\COM4";
+        const char* portName = "\\\\.\\COM10";
 
         SerialPort* arduino;
 
         char receivedString[DATA_LENGTH];
-
-        const char* portName_send = "\\\\.\\COM4";
-
-        //Declare a global object
-        SerialPort* arduino_send;
 
         //Here '\n' is a delimiter 
         const char* sendString = "REQUEST\n";
@@ -55,8 +50,6 @@ int main(void)
         arduino = new SerialPort(portName);
         std::cout << "Is receive connected: " << arduino->isConnected() << std::endl;
 
-        arduino_send = new SerialPort(portName_send);
-        std::cout << "Is send connected: " << arduino->isConnected() << std::endl;
 
         if (arduino->isConnected()) {
             Sensor data;
@@ -81,23 +74,18 @@ int main(void)
                         .field("Temperature", data.temp_value)
                         .field("Battery_Charge", data.battery_voltage)
                         .send_udp("192.168.10.104", 8091);
+                    Sleep(TIME_INTERVAL);
                 }
                 else {
-                    bool hasWritten;
-                    if (portName == portName_send) {
-                        hasWritten = arduino->writeSerialPort(sendString, DATA_LENGTH);
-                    }
-                    else {
-                        hasWritten = arduino_send->writeSerialPort(sendString, DATA_LENGTH);
-                    }
+                    bool hasWritten = arduino->writeSerialPort(sendString, DATA_LENGTH);
                     if (hasWritten) {
                         std::cout << "Data Requested" << std::endl;
                     }
                     else {
                         std::cerr << "Data was not written!" << std::endl;
                     }
+                    Sleep(WAIT_1s);
                 }
-                Sleep(TIME_INTERVAL);
             }
         }
         else {
