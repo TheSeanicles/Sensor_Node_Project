@@ -9,7 +9,7 @@ using namespace std;
 
 // Visit https://github.com/orca-zhang/influxdb-c for more test cases
 
-#define TIME_INTERVAL 290000 //Milliseconds Must be less than Arduino charge time
+#define TIME_INTERVAL 20000 //Milliseconds Must be less than Arduino charge time
 
 #define WAIT_1s 1000 //Milliseconds
 
