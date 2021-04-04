@@ -65,7 +65,7 @@ Arduino ArduinoConstruct(){
   arduino.PWM.counter = 50;
   arduino.PWM.fPWM = 113.0f;
   //Assorted Variables
-  arduino.charging_time = 300000; // 5min
+  arduino.charging_time = 30000; // 30sec
   arduino.node_id = 1;
   arduino.temp_type = Celsius;
   return arduino;
