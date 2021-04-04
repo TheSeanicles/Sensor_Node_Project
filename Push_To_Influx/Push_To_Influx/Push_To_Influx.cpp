@@ -1,17 +1,26 @@
 #include "influxdb.hpp"
+#include "SerialPort.hpp"
 #include "Parse.h"
 #include <fstream>
 #include <string>
-#include<windows.h>
+#include <windows.h>
 #include <iostream>
 using namespace std;
 
 // Visit https://github.com/orca-zhang/influxdb-c for more test cases
 
-#define Sleep_Time 30000 //Milliseconds
+#define TIME_INTERVAL 30000 //Milliseconds
+
+#define DATA_LENGTH 255
+
+const char* portName = "\\\\.\\COM9";
+
+SerialPort* arduino;
+
+char receivedString[DATA_LENGTH];
 
 
-int main(int argc, char const* argv[])
+int main(void)
 {
     WSADATA wsaData;
     int iResult;
@@ -23,15 +32,11 @@ int main(int argc, char const* argv[])
         return 1;
     }
     else {
-        cout << "Enter the data file name without the .txt suffix: ";
+        arduino = new SerialPort(portName);
+        std::cout << "Is connected: " << arduino->isConnected() << std::endl;
 
-        string file_name;
-        cin >> file_name;
-        file_name += ".txt";
 
-        ifstream data_file(file_name);
-
-        if (data_file.is_open()) {
+        if (arduino->isConnected()) {
 
             cout << "Enter the Influx DB Username: ";
             string username;
@@ -40,7 +45,7 @@ int main(int argc, char const* argv[])
             cout << "Password: ";
             string password;
             cin >> password;
-        
+
             Sensor data;
 
             string resp;
@@ -50,11 +55,13 @@ int main(int argc, char const* argv[])
         
             // create_db
             influxdb_cpp::create_db(resp, "Temperature", si_new);
+            
+            int hasRead = arduino->readSerialPort(receivedString, DATA_LENGTH);
+            if (hasRead) std::cout << receivedString << "\n";
+            else std::cerr << "Error occured reading data" << "\n";
 
-            string line;
-            while (getline(data_file, line)) {
-                line += ' ';
-                data = parseLine(line);
+            while (1) {
+                data = parseLine(receivedString);
                 // send_udp
                 int ret = influxdb_cpp::builder()
                     .meas(data.node_id)
@@ -62,11 +69,11 @@ int main(int argc, char const* argv[])
                     .field("Temperature", data.temp_value)
                     .field("Battery_Charge", data.battery_voltage)
                     .send_udp("192.168.10.104", 8091);
-                Sleep(Sleep_Time);
+                Sleep(TIME_INTERVAL);
             }
         }
         else {
-            cout << "File " << file_name << " not found" << endl;
+            cout << "Arduino not connected." << endl;
         }
         return 0;
     }

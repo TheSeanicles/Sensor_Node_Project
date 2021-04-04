@@ -21,9 +21,15 @@
     <ClCompile Include="Parse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SerialPort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialPort.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

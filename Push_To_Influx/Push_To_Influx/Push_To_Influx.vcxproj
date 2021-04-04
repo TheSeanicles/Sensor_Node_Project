@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="Parse.cpp" />
     <ClCompile Include="Push_To_Influx.cpp" />
+    <ClCompile Include="SerialPort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parse.h" />
+    <ClInclude Include="SerialPort.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
