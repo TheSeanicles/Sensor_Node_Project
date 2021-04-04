@@ -37,7 +37,7 @@ struct _Arduino{
   float temp;
   Temperature temp_type;
   unsigned int charging_time;
-  char bluetooth_read;
+  String bluetooth_read;
   int node_id;  //Assigned by MASTER NODE not yet developed
   bool op_state; //CHARGING 1 or SLEEP 0
   char device_type[10]; //So far just NODE might add later
@@ -65,8 +65,8 @@ Arduino ArduinoConstruct(){
   arduino.PWM.counter = 50;
   arduino.PWM.fPWM = 113.0f;
   //Assorted Variables
-  arduino.charging_time = 30000;
-  arduino.node_id = 0;
+  arduino.charging_time = 300000; // 5min
+  arduino.node_id = 1;
   arduino.temp_type = Celsius;
   return arduino;
 }

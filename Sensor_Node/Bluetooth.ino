@@ -32,14 +32,20 @@ void Bluetooth_Send() {
 }
 void Bluetooth_Receive() {
   if (bluetooth_pins.available() > 0) {
-    arduino.bluetooth_read = bluetooth_pins.read();
-    Serial.println(arduino.bluetooth_read);
-    if (arduino.bluetooth_read == 'C') {
-      arduino.temp_type = Celsius;
-    }
-    if (arduino.bluetooth_read == 'F') {
-      arduino.temp_type = Fahrenheit;
-    }
+    Bluetooth_Send();
+    delay(5000);
+    state = states::START;
   }
-  delay(5000);
+  else{
+    state = states::BLUETOOTH;
+  }
+  //if (arduino.bluetooth_read.equals("REQUEST")) {
+    
+  //}
+  //if (arduino.bluetooth_read == 'C') {
+  //  arduino.temp_type = Celsius;
+  //}
+  //if (arduino.bluetooth_read == 'F') {
+  //  arduino.temp_type = Fahrenheit;
+  //}
 }

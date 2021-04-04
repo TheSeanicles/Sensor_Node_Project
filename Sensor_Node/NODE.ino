@@ -27,7 +27,6 @@ void NODE() {
     case states::SLEEP:
       arduino.op_state = 0;
       Sleep(); //If you are using a bluetooth terminal any input wakes from sleep
-      //delay(1000); //If no terminal Un comment the delay() and comment the sleep function
       state = states::TEMP;
       break;
     case states::TEMP:
@@ -35,8 +34,7 @@ void NODE() {
       state = states::BLUETOOTH;
       break;
     case states::BLUETOOTH:
-      Bluetooth_Send();
-      state = states::START;
+      Bluetooth_Receive();
       break;
     case states::HALT:
       break;
