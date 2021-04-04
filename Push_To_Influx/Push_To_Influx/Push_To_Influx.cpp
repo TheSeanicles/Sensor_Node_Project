@@ -8,7 +8,7 @@ using namespace std;
 
 // Visit https://github.com/orca-zhang/influxdb-c for more test cases
 
-#define Sleep_Time 10000 //Milliseconds
+#define Sleep_Time 30000 //Milliseconds
 
 
 int main(int argc, char const* argv[])
