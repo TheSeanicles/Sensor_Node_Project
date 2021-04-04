@@ -108,13 +108,14 @@ Sensor parseLine(const string& line)
 			}
 			break;
 		case ParseStates::NODE_ID:
-			if (c != BLANK) {
+			if (c >= '0' && c <= '9') {
 				token += c;
 				state = ParseStates::NODE_ID;
 				toggle_for_node = 1;
 			}
-			else if (c == BLANK && toggle_for_node) {
-				data.node_id = "NODE: " + token;
+			else if (c == '\n' && toggle_for_node) {
+				token = "NODE: " + token;
+				data.node_id = token;
 				complete_token = true;
 				state = ParseStates::SEPERATOR;
 			}
