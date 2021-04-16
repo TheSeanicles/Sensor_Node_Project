@@ -22,7 +22,13 @@ void NODE() {
         PWM_Generator();
         delay(10);
       }
-      state = states::TEMP;
+      arduino.charging_counter++;
+      if (arduino.charging_counter == 10){
+        state = states::TEMP;
+      }
+      else{
+        state = states::START;
+      }
       break;
     case states::SLEEP:
       arduino.op_state = 0;
@@ -35,6 +41,7 @@ void NODE() {
       break;
     case states::BLUETOOTH:
       Bluetooth_Receive();
+      arduino.charging_counter = 0;
       break;
     case states::HALT:
       break;
