@@ -1,6 +1,6 @@
 void PWM_Generator() {
   arduino.PWM.VoutValue = analogRead(arduino.pins.Vout);
-  arduino.PWM.vOUT = arduino.PWM.VoutValue * 5.0/ 1023.0; // convert from bits to a voltage between 0-5
+  arduino.PWM.vOUT = arduino.PWM.VoutValue * 5.0/ 1024.0; // convert from bits to a voltage between 0-5
   analogWrite(arduino.pins.PWM, arduino.PWM.pulseSig);
   
   arduino.PWM.vBatValue = analogRead(arduino.pins.Vbat);
