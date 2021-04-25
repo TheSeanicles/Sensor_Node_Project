@@ -4,7 +4,7 @@ float Read_Temp() {
   float tempF;
   float vout;
   val = analogRead(arduino.pins.temp);
-  vout = val * (5.0 / 1023.0);
+  vout = val * (5.0 / 1024.0);
   tempC = (vout - 0.5) / 0.01;
   tempF = (tempC * (9.0 / 5.0)) + 32.0;
   //Serial.println(val);

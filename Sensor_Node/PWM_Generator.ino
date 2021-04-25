@@ -4,7 +4,7 @@ void PWM_Generator() {
   analogWrite(arduino.pins.PWM, arduino.PWM.pulseSig);
   
   arduino.PWM.vBatValue = analogRead(arduino.pins.Vbat);
-  arduino.PWM.vBat = arduino.PWM.vBatValue * 5.0 / 1023.0;
+  arduino.PWM.vBat = arduino.PWM.vBatValue * 5.0 / 1024.0;
   
   arduino.PWM.vHold = arduino.PWM.vOUT - arduino.PWM.vBat;
 

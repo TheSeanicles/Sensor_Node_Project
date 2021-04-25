@@ -3,6 +3,6 @@ float Battery_monitor(){
   float vOUT;
   int value;
   value = analogRead(arduino.pins.Vbat);
-  vOUT = (float)value * 5.0 / 1023.0;
+  vOUT = (float)value * 5.0 / 1024.0;
   return vOUT;
 }
